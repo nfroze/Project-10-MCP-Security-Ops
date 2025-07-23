@@ -10,30 +10,46 @@
 
 An MCP (Model Context Protocol) server that gives Claude Desktop direct access to AWS GuardDuty findings, enabling AI-powered security investigations and automated incident response. This is one of the first MCP implementations for security operations.
 
-## Live Demo
+## 🚨 PROVEN IN COMBAT
+**This isn't just theory - I battle-tested this tool against REAL ATTACKS by exposing infrastructure to the internet. See the results below.**
+
+## 🔥 Live Demo
+
+### Part 1: Sample Data Analysis (362 Findings)
+Demonstrating the tool's capabilities with sample GuardDuty findings:
+
+![GuardDuty Findings](screenshots/1.png)
+*Analyzing 362 sample findings - showing the tool can handle enterprise scale*
+
+![Conversation](screenshots/2.png)
+![Conversation](screenshots/3.png)
+![Conversation](screenshots/4.png)
+*Natural language conversations with the AI security analyst*
+
+### Part 2: REAL ATTACK RESPONSE - Battle Tested 🚨
+
+**I exposed a t2.micro EC2 instance to the internet to test this tool under fire:**
+
+#### Attack Detection & Response
+![Initial Detection](screenshots/6.png)
+
+![Critical Incident Dashboard](screenshots/7.png)
+📄 **[LIVE](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
+
+
+#### Post-Remediation
+![Remediation Confirmation](screenshots/8.png)
+
+![All Clear Dashboard](screenshots/9.png)
+📄 **[LIVE](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
 
 ### Generated Reports
-📄 **[Interactive Briefing Presentation](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
-  
-📄 **[Interactive Debrief Presentation](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
-  
+
 📄 **[Executive Summary Report](ExecutiveSummary.md)** 
   
 📄 **[Incident Response Report](IncidentResponse.md)**
 
 *These reports were generated in under 30 seconds from raw security data*
-
-
-### GuardDuty Findings
-![GuardDuty Findings](screenshots/1.png)
-
-Knowing my Agent ha full exposure to these findings, I had a few questions to ask!
-
-### Conversations with Agent
-![Conversation](screenshots/2.png)
-![Conversation](screenshots/3.png)
-![Conversation](screenshots/4.png)
-![Conversation](screenshots/6.png)
 
 ## 💡 The Problem
 
@@ -51,6 +67,7 @@ MCP-powered AI that acts as your Security Operations Center:
 - **Consistent Quality**: Same thorough investigation at 3am or 3pm
 - **Natural Language**: "Are we under attack?" → Complete risk assessment
 - **Automated Reports**: Technical details → board-ready documents
+- **Battle-Proven**: Tested against real SSH brute force and crypto mining attacks
 
 ## 🏗️ Technical Architecture
 
@@ -75,6 +92,7 @@ Claude Desktop ←→ MCP Server ←→ AWS GuardDuty
 "Show me all critical findings from the last 24 hours"
 "Which EC2 instances are compromised?"
 "Is this a real attack or just internet noise?"
+"Create a board briefing for this security incident"
 ```
 
 ### 2. **Automated Incident Investigation**
@@ -101,6 +119,7 @@ Claude Desktop ←→ MCP Server ←→ AWS GuardDuty
 - **Consistency**: 100% of findings investigated thoroughly
 - **Accuracy**: AI catches patterns humans miss
 - **ROI**: ~$500/incident in time savings
+- **Battle-Tested**: Successfully handled real SSH brute force + crypto mining attacks
 
 ## 🛠️ Tech Stack
 
@@ -165,6 +184,7 @@ This project demonstrates the future of security operations:
 - **Democratized Security**: Junior analysts can investigate like seniors
 - **Business Alignment**: Technical findings → executive insights automatically
 - **Proactive Defense**: Find patterns before they become incidents
+- **Battle-Proven**: Not just theory - tested against real attacks
 
 ## 📸 More Screenshots
 
