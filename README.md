@@ -10,19 +10,7 @@
 
 An MCP (Model Context Protocol) server that gives Claude Desktop direct access to AWS GuardDuty findings, enabling AI-powered security investigations and automated incident response. This is one of the first MCP implementations for security operations.
 
-## 🔥 Live Demo
-
-### GuardDuty Findings
-![GuardDuty Findings](screenshots/1.png)
-
-Knowing my Agent ha full exposure to these findings, I had a few questions to ask!
-
-### Conversations with Agent
-![Conversation](screenshots/2.png)
-![Conversation](screenshots/3.png)
-![Conversation](screenshots/4.png)
-![Conversation](screenshots/6.png)
-
+## Live Demo
 
 ### Generated Reports
 📄 **[Interactive Briefing Presentation](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
@@ -34,6 +22,18 @@ Knowing my Agent ha full exposure to these findings, I had a few questions to as
 📄 **[Incident Response Report](IncidentResponse.md)**
 
 *These reports were generated in under 30 seconds from raw security data*
+
+
+### GuardDuty Findings
+![GuardDuty Findings](screenshots/1.png)
+
+Knowing my Agent ha full exposure to these findings, I had a few questions to ask!
+
+### Conversations with Agent
+![Conversation](screenshots/2.png)
+![Conversation](screenshots/3.png)
+![Conversation](screenshots/4.png)
+![Conversation](screenshots/6.png)
 
 ## 💡 The Problem
 
