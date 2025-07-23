@@ -22,9 +22,11 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 
 ![Conversation](screenshots/2.png)
 *Informing Claude of an attack and asking them to create an executive briefing*
+📄 **[Executive Summary Report](ExecutiveSummary.md)** 
 
 ![Conversation](screenshots/3.png)
 *Giving Claude another task based on its access to GuardDuty!*
+📄 **[Incident Response Report](IncidentResponse.md)**
 
 ### Part 2: REAL ATTACK RESPONSE - Battle Tested 🚨
 
@@ -42,14 +44,6 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 
 ![All Clear Dashboard](screenshots/9.png)
 📄 **[LIVE](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
-
-### Generated Reports
-
-📄 **[Executive Summary Report](ExecutiveSummary.md)** 
-  
-📄 **[Incident Response Report](IncidentResponse.md)**
-
-*These reports were generated in under 30 seconds from raw security data*
 
 ## 💡 The Problem
 
