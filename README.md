@@ -24,7 +24,7 @@ Knowing my Agent ha full exposure to these findings, I had a few questions to as
 
 
 ### Generated Reports
-
+📄 **[Security Briefing](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/security-briefing.html)**
 📄 **[Executive Summary Report](ExecutiveSummary.md)** - Board-ready analysis of 362 findings  
 📄 **[Incident Response Report](IncidentResponse.md)** - Complete investigation workflow
 
