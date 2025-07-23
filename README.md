@@ -13,22 +13,23 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 ## 🚨 PROVEN IN COMBAT
 **This isn't just theory - I battle-tested this tool against REAL ATTACKS by exposing infrastructure to the internet. See the results below.**
 
-## 🔥 Live Demo
+## Live Demo
 
 ### Part 1: Sample Data Analysis (362 Findings)
 Demonstrating the tool's capabilities with sample GuardDuty findings:
 
 ![GuardDuty Findings](screenshots/1.png)
-*Analyzing 362 sample findings - showing the tool can handle enterprise scale*
+*362 sample findings produced by GuardDuty*
 
 ![Conversation](screenshots/2.png)
+*Informing Claude of an attack and asking them to create an executive briefing*
+
 ![Conversation](screenshots/3.png)
-![Conversation](screenshots/4.png)
-*Natural language conversations with the AI security analyst*
+*Giving Claude another task based on its access to GuardDuty!*
 
 ### Part 2: REAL ATTACK RESPONSE - Battle Tested 🚨
 
-**I exposed a t2.micro EC2 instance to the internet to test this tool under fire:**
+**I then exposed a t2.micro EC2 instance to the internet to test this tool under fire:**
 
 #### Attack Detection & Response
 ![Initial Detection](screenshots/6.png)
