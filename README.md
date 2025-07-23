@@ -162,16 +162,8 @@ This project demonstrates the future of security operations:
 ## 📸 More Screenshots
 
 ### Claude Desktop Integration
-![MCP Integration](screenshots/mcp-integration.png)
+![MCP Integration](screenshots/5.png)
 *Security tools integrated directly into Claude Desktop*
-
-### Natural Language Processing
-![Natural Language](screenshots/natural-language-query.png)
-*Ask security questions in plain English*
-
-### Real-Time Analysis
-![Real-Time Analysis](screenshots/realtime-analysis.png)
-*Watch Claude investigate findings in real-time*
 
 ---
 
