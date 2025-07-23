@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Security Incident - Board Debrief</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        header {
+            border-bottom: 3px solid #ff6b6b;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            margin: 0;
+            color: #1a1a1a;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .status-banner {
+            background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(81, 207, 102, 0.3);
+        }
+        
+        .diagrams-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .diagram-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .diagram-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .diagram-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 30px;
+            height: 100%;
+            width: 2px;
+            background: #dee2e6;
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #ff6b6b;
+            margin-right: 15px;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+        
+        .timeline-dot.resolved {
+            border-color: #51cf66;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-time {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 2px;
+        }
+        
+        .timeline-event {
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+        
+        .attack-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+        
+        .attack-node {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .attack-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .attack-icon.attacker {
+            background: #ffe3e3;
+        }
+        
+        .attack-icon.target {
+            background: #e3f2fd;
+        }
+        
+        .attack-arrow {
+            flex: 0 0 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .arrow-line {
+            height: 2px;
+            background: #ff6b6b;
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .arrow-line::after {
+            content: '▶';
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            color: #ff6b6b;
+            font-size: 20px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 20px 0;
+        }
+        
+        .metric-box {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .remediation-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .remediation-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+        
+        .remediation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: #51cf66;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .remediation-text {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .severity-high {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+        
+        .severity-medium {
+            color: #ffa94d;
+            font-weight: 600;
+        }
+        
+        footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+                max-width: 100%;
+            }
+            
+            .print-only {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AWS Security Incident - Executive Debrief</h1>
+            <div class="subtitle">GuardDuty Analysis | July 24, 2025 | Board Meeting</div>
+        </header>
+        
+        <div class="status-banner">
+            ✓ ALL SECURITY ISSUES RESOLVED - SYSTEMS SECURE
+        </div>
+        
+        <div class="diagrams-grid">
+            <!-- Diagram 1: Attack Timeline -->
+            <div class="diagram-card">
+                <div class="diagram-title">
+                    <span class="icon">🕐</span>
+                    Attack Timeline & Response
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">July 23, 21:48 UTC</div>
+                            <div class="timeline-event">Initial SSH brute force attack detected</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">July 23, 22:00 UTC</div>
+                            <div class="timeline-event">Cryptocurrency mining activity identified</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">July 23, 22:48 UTC</div>
+                            <div class="timeline-event">GuardDuty alerts triggered (127 attempts)</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot resolved"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-time">July 24, 02:00 UTC</div>
+                            <div class="timeline-event"><strong>All threats neutralized</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagram 2: Attack Vector -->
+            <div class="diagram-card">
+                <div class="diagram-title">
+                    <span class="icon">🎯</span>
+                    Attack Vector Analysis
+                </div>
+                <div class="attack-diagram">
+                    <div class="attack-node">
+                        <div class="attack-icon attacker">
+                            <span style="font-size: 24px;">🔴</span>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 600;">Attacker</div>
+                        <div style="font-size: 11px; color: #6c757d;">198.51.100.42</div>
+                    </div>
+                    <div class="attack-arrow">
+                        <div class="arrow-line"></div>
+                        <div style="font-size: 11px; color: #ff6b6b; margin-top: -20px;">SSH Port 22</div>
+                        <div style="font-size: 11px; color: #6c757d;">127 attempts</div>
+                    </div>
+                    <div class="attack-node">
+                        <div class="attack-icon target">
+                            <span style="font-size: 24px;">🖥️</span>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 600;">EC2 Instance</div>
+                        <div style="font-size: 11px; color: #6c757d;">i-1234567890abcdef0</div>
+                    </div>
+                </div>
+                <div class="metrics-grid" style="margin-top: 20px;">
+                    <div class="metric-box">
+                        <div class="metric-value severity-high">8/10</div>
+                        <div class="metric-label">Severity</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">95%</div>
+                        <div class="metric-label">Confidence</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Findings</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">1hr</div>
+                        <div class="metric-label">Duration</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagram 3: Impact Assessment -->
+            <div class="diagram-card">
+                <div class="diagram-title">
+                    <span class="icon">📊</span>
+                    Impact Assessment
+                </div>
+                <div style="padding: 20px 0;">
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; color: #6c757d; margin-bottom: 5px;">Affected Resources</div>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <div style="background: #e3f2fd; padding: 8px 16px; border-radius: 6px; font-size: 14px;">
+                                    <strong>1</strong> EC2 Instance
+                                </div>
+                                <div style="background: #fff3cd; padding: 8px 16px; border-radius: 6px; font-size: 14px;">
+                                    <strong>Production</strong> Environment
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="font-size: 13px; color: #6c757d; margin-bottom: 8px;">Attack Types Detected:</div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: #ff6b6b; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">SSH Brute Force</span>
+                            <span style="background: #ffa94d; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">Crypto Mining</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                        <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; border: 1px solid #e9ecef;">
+                            <div style="font-size: 20px; font-weight: 700; color: #51cf66;">0</div>
+                            <div style="font-size: 12px; color: #6c757d;">Data Breaches</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; border: 1px solid #e9ecef;">
+                            <div style="font-size: 20px; font-weight: 700; color: #51cf66;">0</div>
+                            <div style="font-size: 12px; color: #6c757d;">Service Outages</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagram 4: Remediation Actions -->
+            <div class="diagram-card">
+                <div class="diagram-title">
+                    <span class="icon">🛡️</span>
+                    Remediation & Prevention
+                </div>
+                <ul class="remediation-list">
+                    <li class="remediation-item">
+                        <div class="check-icon">✓</div>
+                        <div class="remediation-text">
+                            <strong>Blocked attacker IP</strong> - 198.51.100.42 added to security groups
+                        </div>
+                    </li>
+                    <li class="remediation-item">
+                        <div class="check-icon">✓</div>
+                        <div class="remediation-text">
+                            <strong>SSH hardening</strong> - Key-based auth enforced, password login disabled
+                        </div>
+                    </li>
+                    <li class="remediation-item">
+                        <div class="check-icon">✓</div>
+                        <div class="remediation-text">
+                            <strong>Instance cleaned</strong> - Crypto mining processes terminated
+                        </div>
+                    </li>
+                    <li class="remediation-item">
+                        <div class="check-icon">✓</div>
+                        <div class="remediation-text">
+                            <strong>WAF rules updated</strong> - Rate limiting implemented
+                        </div>
+                    </li>
+                    <li class="remediation-item">
+                        <div class="check-icon">✓</div>
+                        <div class="remediation-text">
+                            <strong>GuardDuty enhanced</strong> - Threat intelligence feeds updated
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <div>Confidential - For Board Review Only</div>
+            <div>Generated: July 24, 2025 | AWS GuardDuty Security Report</div>
+        </footer>
+    </div>
+</body>
+</html>
