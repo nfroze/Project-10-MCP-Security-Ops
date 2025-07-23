@@ -15,7 +15,7 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 ### GuardDuty Findings
 ![GuardDuty Findings](screenshots/1.png)
 
-Knowing my Agent had full exposure to these findings, I had a few questions to ask!
+Knowing my Agent ha full exposure to these findings, I had a few questions to ask!
 
 ### Conversations with Agent
 ![Conversation](screenshots/2.png)
@@ -33,7 +33,7 @@ Knowing my Agent had full exposure to these findings, I had a few questions to a
 ## 💡 The Problem
 
 Security teams are drowning in alerts:
-- **362 findings** = 3-4 hours of manual analysis
+- **362 findings** = SOC Teams OVERWHELMED!
 - Context switching between multiple tools
 - Inconsistent investigation quality
 - Slow incident response times
