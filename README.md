@@ -15,7 +15,7 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 
 ## Live Demo
 
-### Part 1: Sample Data Analysis (362 Findings)
+### Part 1: Sample Data
 
 ![GuardDuty Findings](screenshots/1.png)
 *362 sample findings produced by GuardDuty*
