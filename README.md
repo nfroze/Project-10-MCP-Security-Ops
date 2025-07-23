@@ -36,14 +36,14 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 ![Initial Detection](screenshots/6.png)
 
 ![Critical Incident Dashboard](screenshots/7.png)
-📄 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
+📊 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
 
 
 #### Post-Remediation
 ![Remediation Confirmation](screenshots/8.png)
 
 ![All Clear Dashboard](screenshots/9.png)
-📄 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
+📊 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
 
 ## 💡 The Problem
 
