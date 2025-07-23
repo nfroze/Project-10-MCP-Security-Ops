@@ -15,6 +15,8 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 ### GuardDuty Findings
 ![GuardDuty Findings](screenshots/1.png)
 
+Knowing my Agent had full exposure to these findings, I had a few questions to ask!
+
 ### Conversations with Agent
 ![Conversation](screenshots/2.png)
 ![Conversation](screenshots/3.png)
