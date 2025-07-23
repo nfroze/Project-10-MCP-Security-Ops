@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Security Incident - Executive Briefing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #ffffff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .briefing-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #111729;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #ff4444;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            color: #888;
+            font-size: 1.1em;
+        }
+        
+        .header .date {
+            color: #00ffcc;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .diagrams-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .diagram-card {
+            background: #1a1f3a;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .diagram-card:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+        
+        .diagram-title {
+            font-size: 1.3em;
+            color: #00ffcc;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        /* Executive Summary */
+        .severity-indicator {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2em;
+            background: #ff4444;
+            color: white;
+            margin: 15px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric-box {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff4444;
+        }
+        
+        .metric-label {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* Timeline Visualization */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-bar {
+            height: 4px;
+            background: linear-gradient(to right, #00ffcc, #ff4444);
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .timeline-event {
+            position: absolute;
+            top: -8px;
+            width: 20px;
+            height: 20px;
+            background: #ff4444;
+            border-radius: 50%;
+            border: 3px solid #1a1f3a;
+        }
+        
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .attack-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        
+        .attack-node {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            position: relative;
+        }
+        
+        .attacker-node {
+            background: #ff4444;
+            animation: shake 1s infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .target-node {
+            background: #00ffcc;
+        }
+        
+        .attack-arrow {
+            width: 100px;
+            height: 2px;
+            background: #ff4444;
+            position: relative;
+        }
+        
+        .attack-arrow::after {
+            content: '▶';
+            position: absolute;
+            right: -10px;
+            top: -8px;
+            color: #ff4444;
+        }
+        
+        /* Threat Analysis */
+        .threat-details {
+            background: rgba(255, 68, 68, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+        }
+        
+        .threat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .threat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .threat-label {
+            color: #888;
+        }
+        
+        .threat-value {
+            color: #ff4444;
+            font-weight: bold;
+        }
+        
+        /* Response Actions */
+        .action-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .action-item {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #00ffcc;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .action-item:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .action-priority {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff4444;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 68, 68, 0.2);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .status-text {
+            font-weight: bold;
+            color: #ff4444;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="briefing-container">
+        <div class="header">
+            <h1>🚨 Critical Security Incident 🚨</h1>
+            <div class="subtitle">AWS Infrastructure Breach Detection</div>
+            <div class="date">July 23, 2025 | Board Meeting Briefing</div>
+        </div>
+        
+        <div class="diagrams-grid">
+            <!-- Diagram 1: Executive Summary Dashboard -->
+            <div class="diagram-card">
+                <h2 class="diagram-title">📊 Executive Summary Dashboard</h2>
+                <div class="severity-indicator">SEVERITY: HIGH (8/10)</div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Active Threats</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">127</div>
+                        <div class="metric-label">Attack Attempts</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">1hr</div>
+                        <div class="metric-label">Duration</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 68, 68, 0.1); border-radius: 10px;">
+                    <strong>Business Impact:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Production web server under attack</li>
+                        <li>Potential data breach risk</li>
+                        <li>Cryptocurrency mining detected</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Diagram 2: Attack Timeline Visualization -->
+            <div class="diagram-card">
+                <h2 class="diagram-title">⏱️ Attack Timeline</h2>
+                
+                <div class="timeline">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <strong>Attack Pattern: SSH Brute Force</strong>
+                    </div>
+                    
+                    <div class="timeline-bar">
+                        <div class="timeline-event" style="left: 0%;"></div>
+                        <div class="timeline-event" style="left: 50%;"></div>
+                        <div class="timeline-event" style="left: 100%;"></div>
+                    </div>
+                    
+                    <div class="timeline-labels">
+                        <div>
+                            <strong>21:48</strong><br>
+                            <small>First Attack</small>
+                        </div>
+                        <div>
+                            <strong>22:18</strong><br>
+                            <small>Peak Activity</small>
+                        </div>
+                        <div>
+                            <strong>22:48</strong><br>
+                            <small>Last Seen</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="attack-visual">
+                    <div class="attack-node attacker-node">🏴‍☠️</div>
+                    <div class="attack-arrow"></div>
+                    <div class="attack-node target-node">🖥️</div>
+                </div>
+                
+                <div style="text-align: center; color: #888;">
+                    <strong>127 attempts</strong> over <strong>60 minutes</strong>
+                </div>
+            </div>
+            
+            <!-- Diagram 3: Threat Actor Analysis -->
+            <div class="diagram-card">
+                <h2 class="diagram-title">🎯 Threat Actor Profile</h2>
+                
+                <div class="threat-details">
+                    <div class="threat-item">
+                        <span class="threat-label">Attack Type:</span>
+                        <span class="threat-value">SSH Brute Force</span>
+                    </div>
+                    <div class="threat-item">
+                        <span class="threat-label">Source IP:</span>
+                        <span class="threat-value">198.51.100.42</span>
+                    </div>
+                    <div class="threat-item">
+                        <span class="threat-label">Organization:</span>
+                        <span class="threat-value">Suspicious Networks Inc.</span>
+                    </div>
+                    <div class="threat-item">
+                        <span class="threat-label">Target Port:</span>
+                        <span class="threat-value">22 (SSH)</span>
+                    </div>
+                    <div class="threat-item">
+                        <span class="threat-label">Confidence:</span>
+                        <span class="threat-value">95%</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <div style="display: inline-block; padding: 10px 20px; background: #ff4444; border-radius: 10px;">
+                        <strong>⚠️ ACTIVE THREAT ⚠️</strong>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; color: #888; text-align: center;">
+                    Additional crypto-mining activity detected
+                </div>
+            </div>
+            
+            <!-- Diagram 4: Response Actions -->
+            <div class="diagram-card">
+                <h2 class="diagram-title">🛡️ Immediate Response Plan</h2>
+                
+                <ul class="action-list">
+                    <li class="action-item">
+                        <strong>1. Block Attacker IP</strong><br>
+                        <small>Immediately block 198.51.100.42 at firewall level</small>
+                        <span class="action-priority">CRITICAL</span>
+                    </li>
+                    <li class="action-item">
+                        <strong>2. Isolate Affected Instance</strong><br>
+                        <small>Quarantine i-1234567890abcdef0 from network</small>
+                        <span class="action-priority">HIGH</span>
+                    </li>
+                    <li class="action-item">
+                        <strong>3. Forensic Analysis</strong><br>
+                        <small>Capture logs and investigate compromise extent</small>
+                        <span class="action-priority">HIGH</span>
+                    </li>
+                    <li class="action-item">
+                        <strong>4. Security Audit</strong><br>
+                        <small>Review all SSH access and implement MFA</small>
+                        <span class="action-priority">MEDIUM</span>
+                    </li>
+                </ul>
+                
+                <div class="status-bar">
+                    <span class="status-text">⚡ INCIDENT STATUS: ACTIVE</span>
+                    <span class="blink" style="color: #ff4444;">● LIVE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
