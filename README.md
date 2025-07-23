@@ -13,11 +13,7 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 ## 🔥 Live Demo
 
 ### Real Conversation with Claude
-![Claude Conversation](screenshots/claude-conversation-1.png)
-*Natural language security queries processed instantly*
-
-![Claude Analysis](screenshots/claude-conversation-2.png)
-*AI analyzing 362 GuardDuty findings in real-time*
+![GuardDuty Findings](screenshots/1.png)
 
 ### Generated Reports
 
