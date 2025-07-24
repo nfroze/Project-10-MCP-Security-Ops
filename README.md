@@ -33,16 +33,16 @@ An MCP (Model Context Protocol) server that gives Claude Desktop direct access t
 **I then exposed a t2.micro EC2 instance to the internet to test this tool under fire:**
 
 #### Attack Detection & Response
-![Initial Detection](screenshots/6.png)
+![Initial Detection](screenshots/5.png)
 
-![Critical Incident Dashboard](screenshots/7.png)
+![Critical Incident Dashboard](screenshots/6.png)
 📊 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
 
 
 #### Post-Remediation
-![Remediation Confirmation](screenshots/8.png)
+![Remediation Confirmation](screenshots/7.png)
 
-![All Clear Dashboard](screenshots/9.png)
+![All Clear Dashboard](screenshots/8.png)
 📊 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
 
 ## 💡 The Problem
@@ -183,7 +183,7 @@ This project demonstrates the future of security operations:
 ## 📸 More Screenshots
 
 ### Claude Desktop Integration
-![MCP Integration](screenshots/5.png)
+![MCP Integration](screenshots/4.png)
 *Security tools integrated directly into Claude Desktop*
 
 ---
