@@ -1,6 +1,6 @@
 # 🚨 Project 10: MCP Security Incident Response System
 
-**AI-powered security investigation and automated reporting via Model Context Protocol** - turning hours of incident analysis into minutes.
+**AI-powered security investigation and automated reporting via Model Context Protocol**
 
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-blue)](https://modelcontextprotocol.io)
 [![AWS](https://img.shields.io/badge/AWS-GuardDuty-orange)](https://aws.amazon.com/guardduty/)
@@ -57,7 +57,7 @@ Security teams are drowning in alerts:
 ## 🛠️ The Solution
 
 MCP-powered AI that acts as your Security Operations Center:
-- **Instant Analysis**: 362 findings → executive summary in 30 seconds
+- **Instant Analysis**: Processes hundreds of findings simultaneously
 - **Consistent Quality**: Same thorough investigation at 3am or 3pm
 - **Natural Language**: "Are we under attack?" → Complete risk assessment
 - **Automated Reports**: Technical details → board-ready documents
@@ -109,10 +109,10 @@ Claude Desktop ←→ MCP Server ←→ AWS GuardDuty
 
 ## 📊 Results
 
-- **Speed**: 362 findings analyzed in <30 seconds (vs 3-4 hours manual)
+- **Speed**: Analyzes hundreds of findings simultaneously
 - **Consistency**: 100% of findings investigated thoroughly
 - **Accuracy**: AI catches patterns humans miss
-- **ROI**: ~$500/incident in time savings
+- **Efficiency**: Automated analysis and report generation
 - **Battle-Tested**: Successfully handled real SSH brute force + crypto mining attacks
 
 ## 🛠️ Tech Stack
