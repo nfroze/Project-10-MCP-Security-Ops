@@ -1,4 +1,4 @@
-# 🚨 Project 10: MCP Security Incident Response System
+# 🚨 Project 10: MCP Security Ops
 
 **AI-powered security investigation and automated reporting via Model Context Protocol**
 
