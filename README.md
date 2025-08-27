@@ -90,14 +90,14 @@ The system was tested with:
 
 ## Screenshots
 
-1. GuardDuty findings in AWS console
-2. Claude Desktop conversation for executive briefing
-3. Incident response report generation
-4. MCP tools available in Claude
-5. Initial security detection
-6. Critical incident dashboard
-7. Post-remediation confirmation
-8. All-clear status dashboard
+1. [GuardDuty findings in AWS console](screenshots/1.png)
+2. [Claude Desktop conversation for executive briefing](screenshots/2.png)
+3. [Incident response report generation](screenshots/3.png)
+4. [MCP tools available in Claude](screenshots/4.png)
+5. [Initial security detection](screenshots/5.png)
+6. [Critical incident dashboard](screenshots/6.png)
+7. [Post-remediation confirmation](screenshots/7.png)
+8. [All-clear status dashboard](screenshots/8.png)
 
 ## Generated Reports
 
