@@ -1,69 +1,10 @@
-# 🚨 Project 10: MCP Security Ops
+# Project 10: MCP Security Ops
 
-**AI-powered security investigation and automated reporting via Model Context Protocol**
+## Overview
 
-[![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-blue)](https://modelcontextprotocol.io)
-[![AWS](https://img.shields.io/badge/AWS-GuardDuty-orange)](https://aws.amazon.com/guardduty/)
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
+Model Context Protocol server providing Claude Desktop access to AWS GuardDuty findings for security investigation and report generation.
 
-## 🎯 What I Built
-
-An MCP (Model Context Protocol) server that gives Claude Desktop direct access to AWS GuardDuty findings, enabling AI-powered security investigations and automated incident response. This is one of the first MCP implementations for security operations.
-
-## 🚨 PROVEN IN COMBAT
-**This isn't just theory - I battle-tested this tool against REAL ATTACKS by exposing infrastructure to the internet. See the results below.**
-
-## Live Demo
-
-### Part 1: Sample Data
-
-![GuardDuty Findings](screenshots/1.png)
-*362 sample findings produced by GuardDuty*
-
-![Conversation](screenshots/2.png)
-*Informing Claude of an attack and asking them to create an executive briefing*
-📄 **[Executive Summary Report](ExecutiveSummary.md)** 
-
-![Conversation](screenshots/3.png)
-*Giving Claude another task based on its access to GuardDuty!*
-📄 **[Incident Response Report](IncidentResponse.md)**
-
-### Part 2: REAL ATTACK RESPONSE - Battle Tested 🚨
-
-**I then exposed a t2.micro EC2 instance to the internet to test this tool under fire:**
-
-#### Attack Detection & Response
-![Initial Detection](screenshots/5.png)
-
-![Critical Incident Dashboard](screenshots/6.png)
-📊 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/briefing.html)**
-
-
-#### Post-Remediation
-![Remediation Confirmation](screenshots/7.png)
-
-![All Clear Dashboard](screenshots/8.png)
-📊 **[Click here LIVE Dashboard](https://htmlpreview.github.io/?https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System/blob/main/debrief.html)**
-
-## 💡 The Problem
-
-Security teams are drowning in alerts:
-- **362 findings** = SOC Teams OVERWHELMED!
-- Context switching between multiple tools
-- Inconsistent investigation quality
-- Slow incident response times
-- Difficulty communicating technical risks to executives
-
-## 🛠️ The Solution
-
-MCP-powered AI that acts as your Security Operations Center:
-- **Instant Analysis**: Processes hundreds of findings simultaneously
-- **Consistent Quality**: Same thorough investigation at 3am or 3pm
-- **Natural Language**: "Are we under attack?" → Complete risk assessment
-- **Automated Reports**: Technical details → board-ready documents
-- **Battle-Proven**: Tested against real SSH brute force and crypto mining attacks
-
-## 🏗️ Technical Architecture
+## Architecture
 
 ```
 Claude Desktop ←→ MCP Server ←→ AWS GuardDuty
@@ -73,59 +14,17 @@ Claude Desktop ←→ MCP Server ←→ AWS GuardDuty
               Automated Reports
 ```
 
-### Core Components
-- **MCP Server**: Node.js implementation of Model Context Protocol
-- **AWS Integration**: Direct GuardDuty API access
-- **AI Analysis**: Claude Opus for intelligent investigation
-- **Report Generation**: Markdown-formatted incident reports
+## Technologies
 
-## 🚀 Key Features
+- Protocol: Model Context Protocol (MCP)
+- Language: Node.js
+- Cloud: AWS GuardDuty
+- AI: Claude Desktop integration
+- Security: IAM roles, credential chain
 
-### 1. **Natural Language Security Queries**
-```
-"Show me all critical findings from the last 24 hours"
-"Which EC2 instances are compromised?"
-"Is this a real attack or just internet noise?"
-"Create a board briefing for this security incident"
-```
+## Installation
 
-### 2. **Automated Incident Investigation**
-- Analyzes findings across multiple dimensions
-- Identifies attack patterns and campaigns
-- Determines blast radius automatically
-- Suggests remediation steps
-
-### 3. **Executive-Ready Reports**
-- Severity assessment (1-10 scale)
-- Business impact analysis
-- Cost implications
-- Remediation priorities
-
-### 4. **Real-Time Threat Intelligence**
-- Attack source analysis
-- Port targeting patterns
-- Time-based vulnerability windows
-- Coordinated campaign detection
-
-## 📊 Results
-
-- **Speed**: Analyzes hundreds of findings simultaneously
-- **Consistency**: 100% of findings investigated thoroughly
-- **Accuracy**: AI catches patterns humans miss
-- **Efficiency**: Automated analysis and report generation
-- **Battle-Tested**: Successfully handled real SSH brute force + crypto mining attacks
-
-## 🛠️ Tech Stack
-
-- **Protocol**: Model Context Protocol (MCP)
-- **Language**: Node.js
-- **Cloud**: AWS GuardDuty
-- **AI**: Claude Desktop integration
-- **Security**: IAM roles, credential chain
-
-## 📦 Installation
-
-1. Clone the repository
+1. Clone repository
 ```bash
 git clone https://github.com/nfroze/Project-10-MCP-Security-Incident-Response-System.git
 cd Project-10-MCP-Security-Incident-Response-System
@@ -153,41 +52,76 @@ aws configure
 }
 ```
 
-5. Start using natural language security queries!
+## Features
 
-## 🎯 Use Cases
+### Natural Language Queries
+- Retrieve findings by severity
+- Filter by time periods
+- Identify affected resources
+- Generate incident reports
 
-- **Incident Response**: Immediate investigation and reporting
-- **Threat Hunting**: Pattern analysis across findings
-- **Executive Briefings**: Technical → business translation
-- **Compliance**: Automated documentation
-- **24/7 Monitoring**: Consistent analysis round the clock
+### Automated Analysis
+- Finding categorisation
+- Pattern identification
+- Attack source analysis
+- Remediation suggestions
 
-## 🔮 Future Enhancements
+### Report Generation
+- Markdown-formatted output
+- Severity assessment
+- Technical summaries
+- Remediation priorities
 
-- [ ] Integration with Splunk/ELK
-- [ ] Automated remediation execution
-- [ ] Multi-account support
-- [ ] Custom threat intelligence feeds
-- [ ] Slack/Teams notifications
+## Example Queries
 
-## 🏆 Why This Matters
+```
+"Show me all critical findings from the last 24 hours"
+"Which EC2 instances are compromised?"
+"Create a summary report for these security findings"
+"What ports are being targeted?"
+```
 
-This project demonstrates the future of security operations:
-- **AI-Augmented SOC**: Not replacing analysts, but giving them superpowers
-- **Democratized Security**: Junior analysts can investigate like seniors
-- **Business Alignment**: Technical findings → executive insights automatically
-- **Proactive Defense**: Find patterns before they become incidents
-- **Battle-Proven**: Not just theory - tested against real attacks
+## Testing
 
-## 📸 More Screenshots
+The system was tested with:
+- 362 sample GuardDuty findings
+- SSH brute force attempts
+- Crypto mining detection scenarios
 
-### Claude Desktop Integration
-![MCP Integration](screenshots/4.png)
-*Security tools integrated directly into Claude Desktop*
+## Screenshots
 
----
+1. GuardDuty findings in AWS console
+2. Claude Desktop conversation for executive briefing
+3. Incident response report generation
+4. MCP tools available in Claude
+5. Initial security detection
+6. Critical incident dashboard
+7. Post-remediation confirmation
+8. All-clear status dashboard
 
-**Built by [@nfroze](https://github.com/nfroze)** - Turning security alerts into actionable intelligence with AI
+## Generated Reports
 
-*Part of my DevSecOps portfolio demonstrating practical applications of cutting-edge technology to solve real security challenges.*
+- Executive Summary Report
+- Incident Response Report
+- HTML dashboards for incident briefing and debrief
+
+## Project Structure
+
+```
+Project-10-MCP-Security-Ops/
+├── src/
+│   └── index.js          # MCP server implementation
+├── screenshots/          # Documentation images
+├── ExecutiveSummary.md   # Sample generated report
+├── IncidentResponse.md   # Sample incident report
+├── briefing.html        # Incident dashboard
+└── debrief.html         # Post-incident dashboard
+```
+
+## Use Cases
+
+- Incident response automation
+- Security finding analysis
+- Report generation
+- Pattern analysis across findings
+- Documentation for compliance
