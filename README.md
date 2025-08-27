@@ -101,9 +101,10 @@ The system was tested with:
 
 ## Generated Reports
 
-- Executive Summary Report
-- Incident Response Report
-- HTML dashboards for incident briefing and debrief
+- [Executive Summary Report](ExecutiveSummary.md)
+- [Incident Response Report](IncidentResponse.md)
+- [Critical Incident Dashboard](briefing.html)
+- [Post-Incident Dashboard](debrief.html)
 
 ## Project Structure
 
