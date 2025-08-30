@@ -37,3 +37,61 @@ resource "aws_lambda_function" "isolate_ec2" {
     }
   }
 }
+
+# IAM Role for Lambda
+resource "aws_iam_role" "lambda_role" {
+  name = "guardduty-lambda-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+    }]
+  })
+}
+
+# IAM Policy for Lambda
+resource "aws_iam_role_policy" "lambda_policy" {
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ec2:DescribeInstances",
+          "ec2:ModifyInstanceAttribute",
+          "ec2:DescribeSecurityGroups",
+          "ec2:CreateSecurityGroup",
+          "ec2:RevokeSecurityGroupEgress",
+          "ec2:CreateTags",
+          "ec2:DeleteTags"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "arn:aws:logs:*:*:*"
+      }
+    ]
+  })
+}
+
+# Permission for EventBridge to invoke Lambda
+resource "aws_lambda_permission" "allow_eventbridge" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.isolate_ec2.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.guardduty_high_severity.arn
+}
