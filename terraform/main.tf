@@ -33,7 +33,7 @@ resource "aws_lambda_function" "isolate_ec2" {
 
   environment {
     variables = {
-      SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+      SLACK_WEBHOOK_URL = var.slack_webhook_url
     }
   }
 }
