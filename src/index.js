@@ -10,8 +10,9 @@ AWS.config.update({
   region: 'eu-west-2' 
 });
 
-// Initialize GuardDuty client
+// Initialize AWS clients
 const guardduty = new AWS.GuardDuty();
+const ec2 = new AWS.EC2();
 
 // Detect if running in Claude's environment (no AWS creds)
 const IN_CLAUDE_ENV = !process.env.AWS_ACCESS_KEY_ID && !process.env.AWS_SECRET_ACCESS_KEY;
@@ -268,6 +269,58 @@ ${parsedFinding.summary?.title || 'Security incident detected requiring investig
   return report;
 }
 
+async function checkIsolationStatus({ instanceId }) {
+  try {
+    const instance = await ec2.describeInstances({
+      InstanceIds: [instanceId]
+    }).promise();
+    
+    const tags = instance.Reservations[0]?.Instances[0]?.Tags || [];
+    const securityGroups = instance.Reservations[0]?.Instances[0]?.SecurityGroups || [];
+    
+    const isolationTag = tags.find(t => t.Key === 'IsolatedBy');
+    const isIsolated = isolationTag?.Value === 'GuardDuty';
+    
+    return JSON.stringify({
+      instanceId,
+      isolated: isIsolated,
+      isolationTime: tags.find(t => t.Key === 'IsolationTime')?.Value,
+      findingId: tags.find(t => t.Key === 'FindingId')?.Value,
+      currentSecurityGroups: securityGroups.map(sg => sg.GroupId)
+    }, null, 2);
+  } catch (error) {
+    return JSON.stringify({ error: error.message });
+  }
+}
+
+async function reverseIsolation({ instanceId, originalSecurityGroups }) {
+  try {
+    // Restore original security groups
+    await ec2.modifyInstanceAttribute({
+      InstanceId: instanceId,
+      Groups: originalSecurityGroups || ['default']
+    }).promise();
+    
+    // Remove isolation tags
+    await ec2.deleteTags({
+      Resources: [instanceId],
+      Tags: [
+        { Key: 'IsolatedBy' },
+        { Key: 'IsolationTime' },
+        { Key: 'FindingId' },
+        { Key: 'FindingType' }
+      ]
+    }).promise();
+    
+    return JSON.stringify({
+      message: 'Isolation reversed successfully',
+      instanceId
+    }, null, 2);
+  } catch (error) {
+    return JSON.stringify({ error: error.message });
+  }
+}
+
 // Create server
 const server = new Server(
   {
@@ -341,6 +394,39 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ['finding'],
         },
       },
+      {
+        name: 'check_isolation_status',
+        description: 'Check if an EC2 instance is isolated',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            instanceId: { 
+              type: 'string',
+              description: 'EC2 Instance ID to check'
+            }
+          },
+          required: ['instanceId'],
+        },
+      },
+      {
+        name: 'reverse_isolation',
+        description: 'Restore network access to an isolated instance',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            instanceId: { 
+              type: 'string',
+              description: 'EC2 Instance ID to restore'
+            },
+            originalSecurityGroups: {
+              type: 'array',
+              description: 'Original security group IDs to restore',
+              items: { type: 'string' }
+            }
+          },
+          required: ['instanceId'],
+        },
+      },
     ],
   };
 });
@@ -361,6 +447,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         break;
       case 'generate_report':
         result = await generateReport(args);
+        break;
+      case 'check_isolation_status':
+        result = await checkIsolationStatus(args);
+        break;
+      case 'reverse_isolation':
+        result = await reverseIsolation(args);
         break;
       default:
         throw new Error(`Unknown tool: ${name}`);
