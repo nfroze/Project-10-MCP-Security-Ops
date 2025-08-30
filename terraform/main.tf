@@ -1,14 +1,14 @@
-# EventBridge Rule for High Severity GuardDuty Findings
+# EventBridge Rule for GuardDuty Findings
 resource "aws_cloudwatch_event_rule" "guardduty_high_severity" {
   name        = "guardduty-ec2-isolation"
-  description = "Trigger on high severity GuardDuty findings"
+  description = "Trigger on medium to high severity GuardDuty findings"
 
   event_pattern = jsonencode({
     source      = ["aws.guardduty"]
     detail-type = ["GuardDuty Finding"]
     detail = {
       severity = [{
-        numeric = [">=", 7]
+        numeric = [">=", 4]  # Lowered to catch SSH brute force (medium severity)
       }]
       resource = {
         resourceType = ["Instance"]

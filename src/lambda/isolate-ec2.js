@@ -6,13 +6,7 @@ const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
 exports.handler = async (event) => {
   const finding = event.detail;
-  let instanceId = finding.resource?.instanceDetails?.instanceId;
-  
-  // Redirect sample findings to your test instance
-  if (!instanceId || instanceId.startsWith('i-99999999')) {
-    console.log('Sample finding detected, using test instance');
-    instanceId = 'i-061d92470ce5a2311';  // Your actual instance
-  }
+  const instanceId = finding.resource?.instanceDetails?.instanceId;
   
   if (!instanceId) {
     console.log('No EC2 instance found in finding');
