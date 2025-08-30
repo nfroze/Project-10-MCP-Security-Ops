@@ -105,9 +105,12 @@ exports.handler = async (event) => {
 
 async function sendSlackNotification(message) {
   const data = JSON.stringify(message);
+  const url = new URL(SLACK_WEBHOOK_URL);
   
   return new Promise((resolve, reject) => {
     const options = {
+      hostname: url.hostname,
+      path: url.pathname,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,7 +118,7 @@ async function sendSlackNotification(message) {
       }
     };
     
-    const req = https.request(SLACK_WEBHOOK_URL, options, (res) => {
+    const req = https.request(options, (res) => {
       resolve(res.statusCode);
     });
     
