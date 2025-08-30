@@ -1,10 +1,10 @@
-import AWS from 'aws-sdk';
-import https from 'https';
+const AWS = require('aws-sdk');
+const https = require('https');
 
 const ec2 = new AWS.EC2();
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
   const finding = event.detail;
   let instanceId = finding.resource?.instanceDetails?.instanceId;
   

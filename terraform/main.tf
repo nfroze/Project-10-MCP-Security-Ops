@@ -28,7 +28,7 @@ resource "aws_lambda_function" "isolate_ec2" {
   function_name    = "guardduty-isolate-ec2"
   role            = aws_iam_role.lambda_role.arn
   handler         = "isolate-ec2.handler"
-  runtime         = "nodejs18.x"
+  runtime         = "nodejs16.x"
   timeout         = 60
 
   environment {
