@@ -12,7 +12,7 @@ AWS GuardDuty • EventBridge • Lambda • EC2 • Model Context Protocol • 
 - [Claude investigation](screenshots/claude-investigate.png)
 - [Instance restoration](screenshots/claude-restore.png)
 - [GuardDuty investigation](screenshots/claude-guardduty.png)
-- [Claude response](screenshots/claude-claude-response.png)
+- [Claude response](screenshots/claude-response.png)
 
 ## Documents
 
