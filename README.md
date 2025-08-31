@@ -1,4 +1,4 @@
-# Project 10: MCP Security Incident Response System
+# Project 10: MCP Security Ops
 
 Model Context Protocol server for AWS GuardDuty incident response. EventBridge-triggered Lambda for EC2 isolation. Five MCP tools for investigation and remediation. Slack webhook integration.
 
