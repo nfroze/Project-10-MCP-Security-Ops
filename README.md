@@ -1,6 +1,6 @@
 # Project 10: MCP Security Incident Response System
 
-Automated EC2 isolation for GuardDuty findings. Model Context Protocol server for Claude Desktop. EventBridge and Lambda for threat response. Slack notifications.
+Model Context Protocol server for AWS GuardDuty incident response. EventBridge-triggered Lambda for EC2 isolation. Five MCP tools for investigation and remediation. Slack webhook integration.
 
 ## Technologies
 
