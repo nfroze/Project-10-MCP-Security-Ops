@@ -31,6 +31,8 @@ resource "aws_lambda_function" "isolate_ec2" {
   runtime         = "nodejs16.x"
   timeout         = 60
 
+  source_code_hash = filebase64sha256("lambda-deployment.zip")
+
   environment {
     variables = {
       SLACK_WEBHOOK_URL = var.slack_webhook_url
